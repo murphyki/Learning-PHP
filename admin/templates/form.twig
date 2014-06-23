@@ -1,0 +1,46 @@
+{% extends "admin_base.twig" %}
+    
+{% block head_scripts_custom %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var options = {
+                rules: {
+                    name: {
+                        minlength: 1,
+                        required: true
+                    },
+                    file: {
+                        minlength: 1,
+                        required: true
+                    },
+                    caption: {
+                        minlength: 1,
+                        required: true
+                    },
+                    article_title: {
+                        minlength: 1,
+                        required: true
+                    },
+                    href: {
+                        url: true
+                    },
+                    link: {
+                        url: true
+                    },
+                    source: {
+                        required: true
+                    },
+                },
+                highlight: function(element) {
+                    $(element).closest('.control-group').removeClass('success').addClass('error');
+                },
+                success: function(element) {
+                    $(element).closest('.control-group').removeClass('error').addClass('success');
+                }
+            };
+            
+            $("#mainform").validate(options);
+        });
+    </script>
+{% endblock %}

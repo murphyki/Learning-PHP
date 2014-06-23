@@ -1,0 +1,127 @@
+/********************** Application Sspecific Layout **************************************/
+
+html, body {
+    font-family:            Verdana, Arial, "lucida grande"; 
+}
+
+h1 {
+    font-size:              2.0em;
+    padding-top:            0.67em;
+    padding-bottom:         0.67em;
+}
+
+h2 {
+    font-size:              1.5em;
+    padding-top:            0.67em;
+    padding-bottom:         0.67em;
+}
+
+h3 {
+    font-size:              1.0em;
+    font-weight:            normal;
+    padding-top:            0.67em;
+    padding-bottom:         0em;
+}
+
+h4 {
+    font-size:              1.0em;
+    font-weight:            normal;
+    padding-top:            0.67em;
+    padding-bottom:         0.67em;
+}
+
+h5 {
+    font-size:              0.85em;
+    font-weight:            normal;
+    padding-top:            0.67em;
+    padding-bottom:         0.67em;
+}
+
+h6 {
+    font-size:              0.8em;
+    font-weight:            normal;
+    padding-top:            0.67em;
+    padding-bottom:         0.67em;
+}
+
+p {
+    padding-bottom:         0.75em;
+}
+
+.sf-menu a {
+    padding:                0.75em 0.9em;
+}
+
+/*********** This is the menu width DO NOT REMOVE *****************************************/
+.sf-menu li {
+    /* DO NOT SET WIDTH - let it be auto calculated */
+    /*width:*/                      /** __MENU_WIDTH_START__ **/ /*191px;*/ /** __MENU_WIDTH_END__ **/
+}
+/*****************************************************************************************/
+
+.header-container {
+    height:                 220px; /* same height as header image - temp workaround for 3px extra height issue */
+}
+
+.menu-container {
+    width:                  959px;
+    font-family:            verdana;
+}
+
+.main-content-container {
+    line-height:            1.4em;
+    width:                  958px;/* -2px for the left and right border */
+}
+
+.sidebar {
+    width:                  254px;
+    text-align:             left;
+    padding-left:           10px;
+}
+
+.center {
+    width:                  667px;
+    margin-left:            274px; /* must match left width + any side padding */
+    margin-right:           0px;
+    padding:                8px;
+    padding-top:            0px;
+    border-left:            1px solid #ccc;
+    min-height:             580px; 
+    _height:                580px;
+}
+
+.footer-container {
+    font-family:            verdana;
+    font-size:              0.9em;
+    line-height:            1.3em;
+}
+
+.footer-left {
+    float:                  left; 
+    width:                  320px; 
+    text-align:             left;
+}
+
+.footer-middle {
+    float:                  left; 
+    width:                  320px; 
+    text-align:             center;
+}
+
+.footer-right { 
+    text-align:             right;
+}
+
+.footer-container a, .main-content-container a {
+    text-decoration:        none;
+}
+
+.footer-container a:hover, .main-content-container a:hover {
+    text-decoration:        underline;
+}
+
+.center img {
+    padding:                5px;
+    border:                 1px solid;
+    border-radius:          5px;
+}

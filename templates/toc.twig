@@ -1,0 +1,16 @@
+{% extends "app.twig" %}
+
+{% block center_content %}
+    <div class="center">
+        <h2>{{ PAGE_TITLE }}</h2>
+        <div>
+            {% if items|length > 0 %}
+                {% for item in items %}
+                    <p><a href="/{{ item.dir }}">{{ item.name }}</a></p>
+                {% endfor %}
+            {% else %}
+                <p><a href="/{{ item.dir }}">Nothing to display...</a></p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

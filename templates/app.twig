@@ -1,0 +1,29 @@
+{% extends "base.twig" %}
+
+{% block head_custom_meta_tags %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+
+    <!-- Add customised content here -->
+    
+    <div class="main-content-container">
+        <div>
+            {% block left_content %}
+                <div class="sidebar">
+                    {% autoescape false %}
+                        {{ LEFT_CONTENT }}
+                    {% endautoescape %}
+                </div>
+            {% endblock %}
+        </div>
+
+        <div>
+            {% block center_content %}
+            {% endblock %}
+        </div>
+    </div>
+    
+{% endblock %}

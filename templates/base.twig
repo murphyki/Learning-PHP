@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>{% if PAGE_TITLE|length > 0 %}{{ PAGE_TITLE }} | {% endif %}{{ APP_NAME }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta content="{% if PAGE_TITLE|length > 0 %}{{ PAGE_TITLE }} | {% endif %}{{ APP_NAME }}" name="title" />
+        
+        {% if PAGE_DESCRIPTION|length > 0 %}
+            <meta content="{{ PAGE_KEYWORDS }}" name="keywords" />
+        {% endif %}
+            
+        {% if PAGE_DESCRIPTION|length > 0 %}
+            <meta content="{{ PAGE_DESCRIPTION }}" name="description" />
+            <meta property="og:description" content="{{ PAGE_DESCRIPTION }}"/>
+        {% endif %}
+        
+        <meta property="og:title" content="{% if PAGE_TITLE|length > 0 %}{{ PAGE_TITLE }} | {% endif %}{{ APP_NAME }}"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://{{ APP_DOMAIN }}"/>
+        <meta property="og:image" content="http://{{ APP_DOMAIN }}{{ MEDIA_URL }}/images/design/mascot_202x202.png"/>
+        <meta property="og:site_name" content="{{ APP_NAME }}"/>
+        {% block head_custom_meta_tags %}{% endblock %}
+        <link rel="image_src" href="http://{{ APP_DOMAIN }}{{ MEDIA_URL }}/images/design/mascot_202x202.png" />
+        <link rel="shortcut icon" href="http://{{ APP_DOMAIN }}{{ MEDIA_URL }}/images/design/mascot_202x202.png" />
+        <link rel='Stylesheet' type='text/css' href='{{ MEDIA_URL }}/css/jquery-ui-1.8.21.min.css?cacheBust={{ CSS_CACHE_BUST }}' />
+        <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/css/superfish.css?cacheBust={{ CSS_CACHE_BUST }}" media="screen" />
+        {% block head_css %}{% endblock %}
+        <link rel='Stylesheet' type='text/css' href='{{ MEDIA_URL }}/css/base.css?cacheBust={{ CSS_CACHE_BUST }}' />
+        <link rel='Stylesheet' type='text/css' href='{{ MEDIA_URL }}/css/app.css?cacheBust={{ CSS_CACHE_BUST }}' />
+        <link rel='Stylesheet' type='text/css' href='{{ MEDIA_URL }}/css/themes/{{ THEME }}?cacheBust={{ CSS_CACHE_BUST }}' />
+        {% block head_css_custom %}{% endblock %}
+        <script type="text/javascript" src="{{ MEDIA_URL }}/js/jquery-1.7.1.min.js?cacheBust={{ JS_CACHE_BUST }}"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}/js/jquery-ui-1.8.21.min.js?cacheBust={{ JS_CACHE_BUST }}"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}/js/jquery.easing.1.3.js?cacheBust={{ JS_CACHE_BUST }}"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}/js/jquery.cycle.all.js?cacheBust={{ JS_CACHE_BUST }}"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}/js/superfish.js?cacheBust={{ JS_CACHE_BUST }}"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}/js/hoverIntent.js?cacheBust={{ JS_CACHE_BUST }}"></script>
+        {% block head_scripts %}{% endblock %}
+        <script type='text/javascript' src='{{ MEDIA_URL }}/js/base.js?cacheBust={{ JS_CACHE_BUST }}'></script>
+        <script>
+            $(document).ready(function() {
+                mainmenu();
+                enable_row_hover();
+            });
+        </script>
+        {% block head_scripts_custom %}{% endblock %}
+    </head>
+    <body>
+        {% include 'analytics.twig' %}
+        <div class="page-container">
+            {% include 'header.twig' %}
+            
+            {% if DEMO == "demo" %}
+                {% include 'navigation_demo.twig' %}
+            {% else %}
+                {% include 'navigation.twig' %}
+            {% endif %}
+                  
+            {% block content %}
+            {% endblock %}
+
+            {% include 'footer.twig' %}
+            
+        </div>
+    </body>
+</html>

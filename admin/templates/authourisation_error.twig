@@ -1,0 +1,35 @@
+{% extends "admin_base.twig" %}
+
+{% block head_css_custom %}
+    <style type="text/css">
+        #error_container {
+            margin:             0;
+            padding:            0;
+            padding:            10px;
+            border:             1px solid #ccc;
+            text-align:         center;
+            width:              500px;
+            height:             250px;
+            margin-top:         100px;
+            margin-left:        auto;
+            margin-right:       auto;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}    
+    <div id="error_container">
+        <div>
+            {% if USER is not empty %}
+                {{ USER }} is not authourised...
+            {% else %}
+                You are not authourised...
+            {% endif %}
+            
+            <p>
+                If you think that you should be an authourised user please contact
+                the site webmaster at {{ WEBMASTER }}
+            </p>
+        </div>
+    </div>
+{% endblock %}

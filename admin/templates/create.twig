@@ -1,0 +1,12 @@
+{% extends "form.twig" %}
+
+{% block content %}
+    <form enctype="multipart/form-data" id="mainform" name="mainform" class="form-horizontal" method="POST" action="RequestDispatcher.php">
+        <input type="hidden" name="category" value="{{ CATEGORY }}">
+        {% include CREATE_TEMPLATE %}
+        <div class="form-actions">
+            <button type="submit" name="action" value="save" class="btn btn-primary">Save</button>
+            <a href="{{ BACK_URL }}" class="btn">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

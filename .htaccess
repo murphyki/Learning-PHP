@@ -1,0 +1,33 @@
+## Bad Request
+ErrorDocument 400 /error.php
+
+## Unauthorized
+ErrorDocument 401 /error.php
+
+## Payment Required
+ErrorDocument 402 /error.php
+
+## Forbidden
+ErrorDocument 403 /403.php
+
+## Not Found
+ErrorDocument 404 /404.php
+
+## Server Error
+ErrorDocument 500 /500.php
+
+## Bad Gateway
+ErrorDocument 502 /error.php
+
+## Turn off directory listing
+Options -Indexes
+
+## Do not serve twig files
+<filesMatch "\.(twig)$">
+deny from all
+</filesMatch>
+
+## Do not serve log files
+<filesMatch "\.(log)$">
+deny from all
+</filesMatch>

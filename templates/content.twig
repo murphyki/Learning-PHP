@@ -1,0 +1,24 @@
+{% extends "app.twig" %}
+
+{% block center_content %}
+    <div class="center">
+        <h2>{{ article.title }}</h2>
+
+        {% if article.sub_title|length > 0 %}
+            <div style="width: 100%; text-align: right; padding-top: 10px; padding-bottom: 10px;">
+                <h3>{{ article.sub_title }}</h3>
+            </div>
+        {% endif %}
+
+        {% if article.sub_title2|length > 0 %}
+            <p>
+                <h4>{{ article.sub_title2 }}</h4>
+            </p>
+        {% endif %}
+
+        {% autoescape false %}
+            {{ article.content }}
+        {% endautoescape %}
+    </div>
+
+{% endblock %}

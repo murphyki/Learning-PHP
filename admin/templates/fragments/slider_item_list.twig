@@ -1,0 +1,13 @@
+{% for item in items %}
+    <tr>
+        <td>
+            <input type="hidden" name="names[]" value="{{ item.name }}" />
+            <img src="{{ item.encodedSource }}" alt="{{ item.description }}" />
+        </td>
+        <td align='center'>
+            <a class="btn" href="{{ ADMIN_URL }}/EditController.php?category={{ item.dir }}"><i class="icon-pencil"></i>&nbsp;Edit</a>
+        </td>
+    </tr>
+{% endfor %}
+
+{% include "ordered_item_list.twig" %}

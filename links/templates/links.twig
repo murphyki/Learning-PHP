@@ -1,0 +1,44 @@
+{% extends "app.twig" %}
+
+{% block head_scripts_custom %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            function load_links() {
+                var params = {
+                    action: "load_links"
+                };
+                
+                load_html_data("links-page-container", params, function(data) {
+                    $(".links-page-container").html(data);
+                    $(".links-page-container").fadeIn(750); 
+                });
+            }
+
+            // poll for updates..
+            setInterval(function() {
+                var token = $("#links-token").val();
+                check_for_updates(token, load_links);
+            }, 5000);
+            
+            enable_row_hover();
+        });
+    </script>
+{% endblock %}
+    
+{% block center_content %}
+    <div class="center">
+        <h2>{{ PAGE_TITLE }}</h2>
+        <div class="links-page-container">
+            <input type='hidden' id='links-token' name='links-token' value='{{ LINKS_TOKEN }}'/>
+            <table border='0' cellpadding='0' cellspacing='0'>
+                {% for item in linkitems %}
+                    <tr class={{ loop.index is odd ? 'even' : 'odd' }}>  
+                        <td class="td_left">{{ item.caption }}</td>
+                        <td><a href="{{ item.encodedHref }}" target="{{ item.target }}">visit</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

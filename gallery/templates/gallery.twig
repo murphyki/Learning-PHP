@@ -1,0 +1,219 @@
+{% extends "app.twig" %}
+
+{% block head_css %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/css/galleriffic-2.css" />
+{% endblock %}
+    
+{% block head_css_custom %}
+    {{ parent() }}
+    <style type="text/css">
+        .gallery-page-container {
+            padding:                    10px;
+        }
+        
+        .gallery-page-selector-container {
+            text-align:                 right;
+        }
+        
+        div.content {
+            float:                      none;
+            display:                    block;
+            width:                      860px;
+            margin-left:                auto;
+            margin-right:               auto;
+        }
+        
+        div.loader {
+            width:                      860px;
+        }
+        
+        div.slideshow a.advance-link {
+            width:                      860px;
+        }
+        
+        div.slideshow img {
+            border:                     none;
+        }
+        
+        div.navigation {
+            width:                      860px;
+            margin-left:                auto;
+            margin-right:               auto;
+        }
+    </style>
+{% endblock %}
+    
+{% block head_scripts %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}/js/jquery.galleriffic.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}/js/jquery.opacityrollover.js"></script>
+{% endblock %}
+    
+{% block head_scripts_custom %}
+    <script type="text/javascript">
+        var g_gallery = null;
+
+        $(document).ready(function() {
+            $("select").change(function(e) {
+                load_gallery();
+            });
+
+            function build_gallery() {
+                if (g_gallery != null) {
+                    return true;
+                } 
+
+                // We only want these styles applied when javascript is enabled
+                // Leave commented out - use css instead...
+                //$('div.navigation').css({'width' : '250px', 'float' : 'left'});
+                //$('div.navigation').css({'width' : '940px', 'float' : 'left'});
+                //$('div.content').css('display', 'block');
+
+                // Initially set opacity on thumbs and add
+                // additional styling for hover effect on thumbs
+                var onMouseOutOpacity = 0.67;
+                $('#thumbs ul.thumbs li').opacityrollover({
+                    mouseOutOpacity:   onMouseOutOpacity,
+                    mouseOverOpacity:  1.0,
+                    fadeSpeed:         'fast',
+                    exemptionSelector: '.selected'
+                });
+
+                // Initialize Advanced Galleriffic Gallery
+                g_gallery = $('#thumbs').galleriffic({
+                    delay:                     2500,
+                    numThumbs:                 8,
+                    preloadAhead:              10,
+                    enableTopPager:            false,
+                    enableBottomPager:         true,
+                    maxPagesToShow:            15,
+                    imageContainerSel:         '#slideshow',
+                    controlsContainerSel:      '#controls',
+                    captionContainerSel:       '#caption',
+                    loadingContainerSel:       '#loading',
+                    renderSSControls:          true,
+                    renderNavControls:         true,
+                    playLinkText:              'Play Slideshow',
+                    pauseLinkText:             'Pause Slideshow',
+                    prevLinkText:              '&lsaquo; Previous Photo',
+                    nextLinkText:              'Next Photo &rsaquo;',
+                    nextPageLinkText:          'Next &rsaquo;',
+                    prevPageLinkText:          '&lsaquo; Prev',
+                    enableHistory:             false,
+                    autoStart:                 false,
+                    syncTransitions:           true,
+                    defaultTransitionDuration: 900,
+                    onSlideChange:             function(prevIndex, nextIndex) {
+                        // 'this' refers to the gallery, which is an extension of $('#thumbs')
+                        this.find('ul.thumbs').children()
+                            .eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end()
+                            .eq(nextIndex).fadeTo('fast', 1.0);
+                    },
+                    onPageTransitionOut:       function(callback) {
+                        this.fadeTo('fast', 0.0, callback);
+                    },
+                    onPageTransitionIn:        function() {
+                        this.fadeTo('fast', 1.0);
+                    }
+                });
+
+                return false;
+            }
+
+            function load_gallery() {
+                var selectedGallery = $("#gallery-page-selector").val();
+                if (selectedGallery == null || selectedGallery == "null" || selectedGallery.length == 0) {
+                    return;
+                }
+                
+                var params = {
+                    action: "load_gallery",
+                    gallery: encodeURIComponent(selectedGallery)
+                };
+                
+                load_json_data(params, function(data) {
+                    $("#gallery-token").val(data.token);
+                    $("ul.thumbs").html("");
+                    for(var i = 0; i < data.items.length; i++) {
+                        var obj = data.items[i];
+                        addImagetoGallery("image" + i, obj.image, obj.thumb, obj.title, obj.description);
+                    }
+
+                    if (build_gallery()) {
+                        g_gallery.initializeThumbs();
+                        g_gallery.updateThumbs();
+                        g_gallery.gotoIndex(0, false, false);
+                    }
+                });
+            }
+
+            function load_gallery_page_selector() {
+                var selectedGallery = $("#gallery-page-selector").val();
+                var data = {
+                    action: "load_gallery_page_selector",
+                    gallery: encodeURIComponent(selectedGallery)
+                };
+                load_selector("gallery-page-selector", data);
+            }
+
+            function addImagetoGallery(name, image, thumb, title, caption) {
+                var item = "";
+                item += "<li>";
+                item += "  <a class='thumb' name='" + name + "' href='" + image + "' title='" + title + "'>";
+                item += "    <img src='" + thumb + "' alt='" + title + "'/>";
+                item += "  </a>";
+                item += "  <div class='caption'>";
+                item += caption;
+                item += "  </div>";
+                item += "</li>";
+
+                //g_gallery.addImage(item);
+                $("ul.thumbs").append(item);
+            }
+            
+            $("select").change();
+
+            // Poll for updates
+            setInterval(function() {
+                var token = $("#gallery-token").val()
+                check_for_updates(token, load_gallery_page_selector);
+            }, 5000);
+        });
+    </script>
+{% endblock %}
+    
+{% block content %}
+    <div class="gallery-page-container">
+        <div class="gallery-page-selector-container">
+        <label for="gallery-page-selector">Select a gallery: </label>
+            <select id="gallery-page-selector">
+                {% autoescape false %}
+                    {{ GALLERIES }}
+                {% endautoescape %}
+            </select>
+        </div>
+            
+        <input type="hidden" id="gallery-token" name="gallery-token" value="{{ GALLERY_TOKEN }}"/>
+        
+        <div id="gallery" class="content">
+            <div style="clear: both;">&nbsp;</div>
+            <div id="controls" class="controls"></div>
+
+            <div id="caption" class="caption-container"></div>
+
+            <div class="slideshow-container">
+                <div id="loading" class="loader"></div>
+                <div id="slideshow" class="slideshow"></div>
+            </div>
+        </div>
+
+        <div style="padding-top: 10px; padding-bottom: 10px;">&nbsp;</div>
+
+        <div id="thumbs" class="navigation">
+            <ul class="thumbs noscript">
+            </ul>
+        </div>
+    </div>
+    
+    <div style="clear: both;">&nbsp;</div>
+{% endblock %}

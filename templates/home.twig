@@ -1,0 +1,17 @@
+{% extends "app.twig" %}
+
+{% block head_css %}
+    {{ parent() }}
+{% endblock %}
+    
+{% block head_css_custom %}
+    {{ parent() }}
+{% endblock %}
+
+{% block center_content %}
+    <div>
+        {% autoescape false %}
+            {{ MAIN_CONTENT }}
+        {% endautoescape %}
+    </div>
+{% endblock %}

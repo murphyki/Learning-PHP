@@ -1,0 +1,24 @@
+<fieldset>
+    <legend>Edit {{ item.file }}</legend>
+    <div class="control-group">
+        <label class="control-label" for="file">File</label>
+        <div class="controls">
+            <input type="text" name="file" value="{{ item.file }}" class="input-xlarge"/>
+        </div>
+    </div>
+    {% if item.viewable == true %}
+        <div class="control-group">
+            <label class="control-label" for="viewable">Viewable</label>
+            <div class="controls">
+                <input type="checkbox" name="viewable" checked="checked"/>
+            </div>
+        </div>
+    {% else %}
+        <div class="control-group">
+            <label class="control-label" for="viewable">Viewable</label>
+            <div class="controls">
+                <input type="checkbox" name="viewable"/>
+            </div>
+        </div>
+    {% endif %}
+</fieldset>

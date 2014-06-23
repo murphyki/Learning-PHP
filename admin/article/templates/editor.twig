@@ -1,0 +1,89 @@
+{% extends "form.twig" %}
+
+{% block head_css_custom %}
+    <style type="text/css">
+        #article_caption {
+            width: 99%;
+            resize: none;
+        }
+    </style>
+{% endblock %}
+
+{% block head_scripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ MEDIA_URL }}/js/tinymce/tinymce.min.js"></script>
+{% endblock %}
+    
+{% block head_scripts_custom %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            tinymce.init({
+                width: "100%",
+                height: {{ EDITOR_HEIGHT }},
+                selector: "#article_content",
+                theme: "modern",
+                plugins: [
+                    "advlist autolink lists link image charmap hr anchor", 
+                    "searchreplace wordcount visualblocks visualchars code fullscreen",
+                    "insertdatetime media nonbreaking table contextmenu directionality", 
+                    "paste"
+                ],
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% include "status.twig" %}
+    <form id="mainform" name="mainform" class="form-horizontal" method="POST" action="controller.php">
+        <input type='hidden' id='category' name='category' value='{{ CATEGORY }}'/>
+        <div class="control-group">
+            <label class="control-label" for="article_title">Main Title</label>
+            <div class="controls">
+               <input type='text' name='article_title' value='{{ article.title }}' required/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="article_date">Date</label>
+            <div class="controls">
+               <input type='date' name='article_date' value='{{ article.pub_date|date("Y-m-d") }}'/>
+            </div>
+        </div>
+        {% if not IS_NOTICEBOARD_ITEM %}
+            <div class="control-group">
+                <label class="control-label" for="article_sub_title">Sub Title</label>
+                <div class="controls">
+                   <input type='text' name='article_sub_title' value='{{ article.sub_title }}'/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="article_sub_title2">Sub Title2</label>
+                <div class="controls">
+                   <input type='text' name='article_sub_title2' value='{{ article.sub_title2 }}'/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="article_caption">Summary</label>
+                <div class="controls">
+                   <textarea id="article_caption" name='article_caption'>{% autoescape false %}{{ article.description }}{% endautoescape %}</textarea>
+                </div>
+            </div>
+        {% else %}
+            <input type='hidden' name='article_sub_title' value=''/>
+            <input type='hidden' name='article_sub_title2' value=''/>
+            <input type='hidden' name='article_caption' value=''/>
+        {% endif %}
+        <div class="control-group">
+            <label class="control-label" for="article_content">Main Content</label>
+            <div class="controls">
+               <textarea id='article_content' name='article_content'>{% autoescape false %}{{ article.content }}{% endautoescape %}</textarea>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" name="action" value="publish" class="btn btn-primary">Publish</button>
+            <a href="{{ ADMIN_URL }}/index.php?category={{ BACK }}" class="btn">Back</a>
+        </div>
+    </form>
+{% endblock %}     

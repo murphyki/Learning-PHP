@@ -1,0 +1,17 @@
+<?php
+    include_once(realpath($_SERVER["DOCUMENT_ROOT"]) . "/Config.php");
+    include_once(DIR_LIB . "/core/ArticleItem.php");
+    include_once(DIR_LIB . "/core/Logger.php");
+    
+    Logger::init();
+  
+    $item = new ArticleItem("{{ item_category }}", "{{ item_title }}");
+    $item->load_from_xml();
+    
+    $context = array(
+        "PAGE_TITLE"=>$item->getTitle(),
+        "article"=>$item
+    );
+        
+    echo(Config::load_template(array(), "content.twig", $context));
+?>

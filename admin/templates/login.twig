@@ -1,0 +1,20 @@
+{% extends "admin_base.twig" %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12 text-center">
+                <p>Login to {{ APP_NAME }} with:</p>
+                <p>
+                    <a class="btn btn-large" href="{{ GOOGLE_URL }}"><img class="img-rounded" src="{{ MEDIA_URL }}/images/design/google_logo_large.png"/></a>
+                </p>
+                <p>
+                    or
+                </p>
+                <p>
+                    <a class="btn btn-large" href="{{ FACEBOK_URL }}"><img class="img-rounded" src="{{ MEDIA_URL }}/images/design/facebook_logo_large.png"/></a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

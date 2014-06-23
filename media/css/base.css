@@ -1,0 +1,194 @@
+/* 
+    Document   : kdygaa
+    Created on : 15-Feb-2012, 15:54:08
+    Author     : Kieran
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+html, body {
+        font-family:            Verdana, Arial, "lucida grande"; 
+        font-size:              90%; 
+        width:                  100%; 
+        height:                 100%;
+}
+
+html, body, div, p, table, div, h1, h2, h3, h4, h5, h6 {
+        padding:                0;
+        margin:                 0;
+}
+
+/******************* Layout ********************/
+.clear-and-reset {
+        clear:                  both; 
+        padding:                0; 
+        margin:                 0;
+}
+
+.page-container {
+        width:                  960px; 
+        margin-left:            auto; 
+        margin-right:           auto; 
+}
+
+.top-container {
+        width:                  960px;
+}
+
+.header-container {
+        width:                  960px;
+}
+
+.menu-container {
+        width:                  960px; /* If menu wraps onto second line, reduce this by 1px to 959 */
+        height:                 32px;
+        border-top:             1px solid;
+        border-bottom:          1px solid;
+        border-right:           1px solid;
+}
+
+.main-content-container {
+        width:                  960px;
+        min-height:             560px;
+        _height:                560px;
+}
+
+.sidebar {
+        float:                  left; 
+        width:                  300px;
+}
+
+.center {
+        margin-left:            300px;
+        min-height:             560px; 
+        _height:                560px;
+}
+
+.footer-container {
+        clear:                  both; 
+        width:                  960px;
+        text-align:             center; 
+        vertical-align:         middle; 
+        padding:                0px;
+}
+
+.downloads-page-container {
+        text-align:             center;
+}
+
+.links-page-container {
+        text-align:             center;
+}
+
+a img { 
+        border:                 none; 
+}
+
+table {
+        width:                  100%;
+        font-size:              1.0em; 
+        border-collapse:        collapse; 
+        empty-cells:            show;
+}
+
+table th {
+        white-space:            nowrap;
+        margin:                 0;
+        padding:                5px;
+        text-align:             center;
+}
+
+table td {
+        font-weight:            normal;
+        margin:                 0;
+        padding:                5px;
+        text-align:             center;
+}
+
+table td.td_left, table th.th_left {
+        text-align:             left;
+}
+
+table td a {
+        text-decoration:        none;
+}
+
+table td a:hover {
+        text-decoration:        underline;
+}
+
+.gallery-page-container table td {
+        padding:                10px;
+}
+
+/******************* superfish customised menu layout ********************/
+.sf-menu {
+        margin-bottom:          0em;
+}
+
+.sf-menu ul {
+        width:                  15em;/* left offset of submenus need to match (see below) */
+}
+
+ul.sf-menu li li:hover ul,
+ul.sf-menu li li.sfHover ul {
+	left:			15em; /* match ul width */
+}
+
+ul.sf-menu li li li:hover ul,
+ul.sf-menu li li li.sfHover ul {
+	left:			15em; /* match ul width */
+}
+
+.sf-menu a {
+	border-left:            1px solid;
+        border-top:             none;
+        border-bottom:          none;
+        text-align:             center;
+}
+
+.sf-menu li li a {
+	border-left:            1px solid;
+	border-top:		1px solid;
+        border-bottom:		none;
+        text-align:             center;
+}
+
+/******************* Gallerific customised layout ********************/
+div.content {
+	float:                  none;
+	width:                  802px;
+}
+
+div.controls {
+        display:                block;
+}
+
+div.loader {
+	width:                  802px;
+}
+
+div.slideshow a.advance-link {
+	width:                  802px;
+	height:                 502px; /* This should be set to be at least the height of the largest image in the slideshow */
+	line-height:            0px;
+}
+
+div.slideshow img {
+	vertical-align:         middle;
+}
+
+div.caption-container {
+	min-height:             30px;
+        _height:                30px;
+        padding-top:            5px;
+        padding-bottom:         5px;
+}
+
+span.image-caption {
+	width:                  550px;
+}
+
+ul.thumbs li {
+	display:                inline;
+}

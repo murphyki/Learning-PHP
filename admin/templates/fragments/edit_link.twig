@@ -1,0 +1,29 @@
+<fieldset>
+    <legend>Edit {{ item.caption }}</legend>
+    <div class="control-group">
+        <label class="control-label" for="caption">Caption</label>
+        <div class="controls">
+            <input type="text" name="caption" value="{{ item.caption }}" class="input-xxlarge" required/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="href">URL</label>
+        <div class="controls">
+            <input type="url" name="href" value="{{ item.href }}" placeholder="http://www.example.com" class="input-xxlarge" required/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="title">Link Tooltip</label>
+        <div class="controls">
+            <input type="text" name="title" value="{{ item.title }}" class="input-xxlarge"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="target">Target</label>
+        <div class="controls">
+            <select name="target">
+                <option selected value="_blank">Open in New Tab</option>
+            </select>
+        </div>
+    </div>
+</fieldset>

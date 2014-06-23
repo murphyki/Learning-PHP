@@ -1,0 +1,22 @@
+<fieldset>
+    <legend>Create New Gallery</legend>
+    <div class="control-group">
+        <label class="control-label" for="source">Gallery Name</label>
+        <div class="controls">
+            <input type="text" name="name" value="" class="span4" required/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="file">Choose a ZIP file to upload</label>
+        <div class="controls">
+            <input type="hidden" name="MAX_FILE_SIZE" value="300000000" />
+            <input name="gallery_file" type="file" required/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="viewable">Viewable</label>
+        <div class="controls">
+            <input type="checkbox" name="viewable"/>
+        </div>
+    </div>
+</fieldset>

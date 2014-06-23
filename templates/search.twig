@@ -1,0 +1,20 @@
+{% extends "app.twig" %}
+    
+{% block head_scripts %}
+    {{ parent() }}
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+{% endblock %}
+
+{% block head_scripts_custom %}
+    <script type="text/javascript"> 
+        /**
+         * Custom google search javascript goes here
+         */
+    </script>
+{% endblock %}
+    
+{% block center_content %}
+    <div style="overflow: hidden; width: 100%;">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div>
+{% endblock %}
