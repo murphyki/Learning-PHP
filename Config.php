@@ -106,8 +106,8 @@ abstract class Config {
 
     public static function get_admins() {
         $admins = array(
-            array("Kieran Murphy", "kierantmurphy@gmail.com"),
-            array("Kieran Murphy", "kieran.murphy.9275")
+            array("Billy Bob", "billybob@mynewapp.com"),
+            array("Billy Bob", "billy.bob.9275")
         );
 
         return $admins;
