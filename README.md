@@ -1,4 +1,4 @@
-MyPHPFramework
+Learning-PHP
 ==============
 
-A framework for working with php, twig and css
+A project for learning php, twig and css
